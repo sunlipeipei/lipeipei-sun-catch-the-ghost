@@ -1,10 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
 import LandingPage from './Pages/LandingPage.jsx'
-import EasyGame from './Pages/GameEasy.jsx'
+import GameEasy from './Pages/GameEasy.jsx'
+import GameMedium from './Pages/GameMedium.jsx'
+import GameHard from './Pages/GameHard.jsx'
+import { BoardProvider } from './Components/BoardContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,27 @@ const router = createBrowserRouter([
   },
   {
     path: '/game/easy',
-    element: <GameEasy />,
+    element:(
+      <BoardProvider key='easy' difficulty='easy'>
+        <GameEasy />
+      </BoardProvider>
+    ) 
+  },
+  {
+    path: '/game/medium',
+    element:(
+      <BoardProvider key='medium' difficulty='medium'>
+        <GameMedium />
+      </BoardProvider>
+    ) ,
+  },
+  {
+    path: '/game/hard',
+    element:(
+      <BoardProvider key='hard' difficulty='hard'>
+        <GameHard />
+      </BoardProvider>
+    ) ,
   }
 ])
 
