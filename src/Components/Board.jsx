@@ -3,7 +3,7 @@ import Cell from "./Cell"
 import "./Board.css"
 
 export default function Board(){
-    const {board, revealCell, flagCell} = useBoard();
+    const {board, revealCell, flagCell, unFlagCell} = useBoard();
     
     return(
         <div 
@@ -18,7 +18,14 @@ export default function Board(){
                         key={`${rowIndex}-${colIndex}}`} 
                         cell={cell} 
                         onClick={()=> revealCell(rowIndex, colIndex)}
-                        onRightClick={() => flagCell(rowIndex, colIndex)} />
+                        onRightClick = {(isShiftKey) => {
+                            if (isShiftKey) {
+                                unFlagCell(rowIndex, colIndex); // Unflag if Shift is held
+                            } else {
+                                flagCell(rowIndex, colIndex); // Flag if Shift is not held
+                            }
+                        }}
+                    />
                 ))
             )}
         </div>

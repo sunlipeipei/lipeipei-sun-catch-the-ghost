@@ -43,7 +43,7 @@ export const initializeBoard = (difficulty) => {
         board[row][col].isMine = true;
         updateMineCounts(board, row, col);
     }
-    return board;
+    return {board, numMines};
 };
 
 // Update the adjacent mine counts when a new mine was added

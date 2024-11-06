@@ -10,7 +10,7 @@ export default function Cell({ cell, onClick, onRightClick }) {
             onClick={onClick}
             onContextMenu={(e) => {
                 e.preventDefault();
-                onRightClick();
+                onRightClick(e.shiftKey);
             }}
         >
             {cell.isRevealed 

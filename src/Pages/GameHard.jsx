@@ -5,13 +5,13 @@ import './Page.css'
 import Header from "../Components/Header"
 
 export default function GameHard(){
-  const {resetGame} = useContext(BoardContext);
-  return (
+  const {resetGame, message} = useContext(BoardContext);
 
+  return (
     <div>
       <Header></Header>
       <div className="container">
-        <h3>Catch the Ghost</h3>
+        <h3>{message}</h3>
         <Board />
         <button onClick={()=>resetGame()}>Reset Game</button>
       </div>

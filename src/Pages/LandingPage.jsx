@@ -8,7 +8,7 @@ export default function LandingPage(){
           <h3>
             Welcome to the Catch the Ghost Game!
           </h3>
-          Pick a difficulty level to begin!
+          Pick a difficulty level to begin playing!
         </div>
       )
 }
