@@ -14,8 +14,8 @@ export function BoardProvider({children, difficulty}){
     const [ghostCounts, setGhostCounts] = useState(numMines)
 
     const revealCell = (row, col) => {
-        console.log(row, col)
-        if (!isGameOver && !board[row][col].isRevealed) { // Check if game is over or cell is already revealed
+
+        if (!isGameOver && !board[row][col].isRevealed) {
             setBoard((prevBoard) => {
                 const newBoard = prevBoard.map((r, rowIndex) =>
                     r.map((cell, colIndex) => {
@@ -27,11 +27,15 @@ export function BoardProvider({children, difficulty}){
                 );
     
                 if (newBoard[row][col].isMine) {
-                    setMessage("🕷️ Game Over! You Lost! 🕷️");
+                    setMessage("😱 Game Over! You Lost! 😱");
                     setIsGameOver(true);
                     console.log("Game over!!!");
                 } else {
-                    const revealedCell = newBoard.flat().filter(cell => cell.isRevealed).length; // Calculate revealed cell number to check if the player wins
+                    if (newBoard[row][col].mineCount===0){
+                        revealEmptyCells(newBoard, row, col)
+                    }
+                    // Calculate revealed cell number to check if the player wins
+                    const revealedCell = newBoard.flat().filter(cell => cell.isRevealed).length;
                     if (revealedCell === (board.length * board[0].length - numMines)) {
                         setMessage("🎃 Game Over! You Won! 🎃");
                         setIsGameOver(true);
@@ -42,6 +46,32 @@ export function BoardProvider({children, difficulty}){
             });
         }
     };
+
+    // Check the cells around the empty cell, if is empty, recusively reveal the empty cells
+    const revealEmptyCells = (newBoard, row, col) => {
+        const directions = [
+            [-1, 0], [-1, -1], [-1, 1], 
+            [0, -1], [0, 1],
+            [1, 0], [1, -1], [1, 1]
+        ];
+    
+        const boardRow = board.length;
+        const boardCol = board[0].length;
+    
+        newBoard[row][col].isRevealed = true;
+
+        directions.forEach(([dx, dy]) => {
+            const newRow = row + dx;
+            const newCol = col + dy;
+    
+            if(newRow>=0 && newRow<boardRow && newCol>=0 && newCol<boardCol && !newBoard[newRow][newCol].isRevealed){
+                if (newBoard[newRow][newCol].mineCount===0){
+                    newBoard[newRow][newCol].isRevealed = true;
+                    revealEmptyCells(newBoard, newRow, newCol)
+                }
+            }
+        })
+    }
 
     const flagCell = (row, col) => {
         if(isGameOver===false){
