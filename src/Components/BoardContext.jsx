@@ -59,6 +59,7 @@ export function BoardProvider({children, difficulty}){
         const boardCol = board[0].length;
     
         newBoard[row][col].isRevealed = true;
+        newBoard[row][col].isFlagged = false;
 
         directions.forEach(([dx, dy]) => {
             const newRow = row + dx;
