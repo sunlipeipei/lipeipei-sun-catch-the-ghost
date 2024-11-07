@@ -114,13 +114,8 @@ export function BoardProvider({children, difficulty}){
         setBoard(newBoard);
         setIsGameOver(false);
         setMessage("👻 Catch the Ghosts!!! 👻")
-        console.log("new board after reset:")
-        console.log(newBoard)
+        setGhostCounts(numMines);
     }
-
-    // Set game over
-    // Count total revealed cell
-    // Count correct flagged cell or check
 
     return (
         <BoardContext.Provider value={{ board, revealCell, flagCell, unFlagCell, isGameOver, resetGame, message, ghostCounts}}>
