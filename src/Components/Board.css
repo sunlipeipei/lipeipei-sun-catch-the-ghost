@@ -1,9 +1,8 @@
-.board {
-    width:fit-content;
-    display: grid;
-}
-
 h1 {
     font-family: Sans-serif;
     font-weight: normal;
+}
+.board{
+    width: fit-content;
+    display: grid;   
 }

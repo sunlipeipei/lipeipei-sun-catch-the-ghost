@@ -1,28 +1,28 @@
-import { useBoard } from "./BoardContext"
-import Cell from "./Cell"
-import "./Board.css"
+import { useContext } from "react";
+import './Board.css'
+import { CatchTheGhostContext } from "../Components/CatchTheGhostProvider";
+import GhostCell from "../Components/GhostCell";
 
 export default function Board(){
-    const {board, revealCell, flagCell, unFlagCell} = useBoard();
-    
+    const globalProps = useContext(CatchTheGhostContext);
+    const boardState = globalProps.boardState;
+    console.log("Current Board State:", boardState);
     return(
         <div 
             className='board'
-            style={{
-                gridTemplateColumns: `repeat(${board[0].length}, 30px)`, // Dynamically set columns based on board width
-            }}
+            style={{gridTemplateColumns: `repeat(${boardState[0].length}, 30px)` }} // Set the columns based on the game board
         >
-            {board.map((row, rowIndex) =>
+            {boardState.map((row, rowIndex) =>
                 row.map((cell, colIndex) => (
-                    <Cell 
-                        key={`${rowIndex}-${colIndex}}`} 
+                    <GhostCell 
+                        key={`${rowIndex}-${colIndex}`} 
                         cell={cell} 
-                        onClick={()=> revealCell(rowIndex, colIndex)}
-                        onRightClick = {(isShiftKey) => {
+                        onClick={() => globalProps.revealCell(rowIndex, colIndex)}
+                        onRightClick={(isShiftKey) => {
                             if (isShiftKey) {
-                                unFlagCell(rowIndex, colIndex); // Unflag if Shift is held
+                                globalProps.unFlagCell(rowIndex, colIndex);
                             } else {
-                                flagCell(rowIndex, colIndex); // Flag if Shift is not held
+                                globalProps.flagCell(rowIndex, colIndex);
                             }
                         }}
                     />

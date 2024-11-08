@@ -1,44 +1,40 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LandingPage from './Pages/LandingPage.jsx'
 import GameEasy from './Pages/GameEasy.jsx'
 import GameMedium from './Pages/GameMedium.jsx'
 import GameHard from './Pages/GameHard.jsx'
-import { BoardProvider } from './Components/BoardContext.jsx'
+import CatchTheGhostProvider from './Components/CatchTheGhostProvider.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LandingPage />,
+    element: <LandingPage />
   },
   {
     path: '/game/easy',
-    element:(
-      <BoardProvider key='easy' difficulty='easy'>
-        <GameEasy />
-      </BoardProvider>
-    ) 
+    element: 
+    <CatchTheGhostProvider key='easy' difficulty='easy'>
+      <GameEasy/>
+    </CatchTheGhostProvider>
   },
   {
     path: '/game/medium',
-    element:(
-      <BoardProvider key='medium' difficulty='medium'>
-        <GameMedium />
-      </BoardProvider>
-    ) ,
+    element: 
+    <CatchTheGhostProvider key='medium' difficulty='medium'>
+      <GameMedium/>
+    </CatchTheGhostProvider>
   },
   {
     path: '/game/hard',
-    element:(
-      <BoardProvider key='hard' difficulty='hard'>
-        <GameHard />
-      </BoardProvider>
-    ) ,
-  }
+    element: 
+    <CatchTheGhostProvider key='hard' difficulty='hard'>
+      <GameHard/>
+    </CatchTheGhostProvider>
+  },
 ])
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
