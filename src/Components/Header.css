@@ -17,3 +17,7 @@
     margin: 8px;
     cursor: pointer;
 }
+
+.text:hover{
+    font-weight: bold;
+}

@@ -14,7 +14,7 @@ export default function Cell({ cell, onClick, onRightClick }) {
             }}
         >
             {cell.isRevealed 
-            ? (cell.isMine ? '👻' : cell.mineCount)
+            ? (cell.isMine ? '👻' : (cell.mineCount===0? '':cell.mineCount))
             : (cell.isFlagged ? '🎃' : '')}
         </div>
     );
