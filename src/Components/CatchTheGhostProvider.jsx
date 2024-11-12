@@ -78,8 +78,8 @@ const updateGhostCounts = (board, row, col) => {
 export default function CatchTheGhostProvider({children, difficulty}){
 
     const {board: initialBoard, numGhost} = initializeGameBoard(difficulty);
-    console.log("Initial Board:", initialBoard);
-    console.log("Number of Ghosts:", numGhost);
+    // console.log("Initial Board:", initialBoard);
+    // console.log("Number of Ghosts:", numGhost);
     const [boardState, setBoardState] = useState(initialBoard);
     const [gameOverState, setGameOverState] = useState(false);
     const [messageState, setMessageState] = useState("👻 Catch the Ghosts!!! 👻");

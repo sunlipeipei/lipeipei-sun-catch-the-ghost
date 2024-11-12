@@ -6,7 +6,6 @@ import GhostCell from "../Components/GhostCell";
 export default function Board(){
     const globalProps = useContext(CatchTheGhostContext);
     const boardState = globalProps.boardState;
-    // console.log("Current Board State:", boardState); 
 
     return(
         <div className="board-container">

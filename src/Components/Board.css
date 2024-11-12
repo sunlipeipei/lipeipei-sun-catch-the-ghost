@@ -8,7 +8,7 @@ h1 {
 }
 
 .board-container {
-    overflow-x: auto; /* Enables horizontal scroll if needed */
+    overflow-x: auto; /* Enables horizontal scroll if the board is too wide */
     max-width: 100vw;
 }
 
