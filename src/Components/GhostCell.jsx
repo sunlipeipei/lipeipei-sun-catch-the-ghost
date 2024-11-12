@@ -2,7 +2,7 @@ import './GhostCell.css'
 
 export default function GhostCell({cell, onClick, onRightClick}){
 
-    const className = cell.isRevealed ? 'defaultCell revealedCell' : 'defaultCell';
+    const className = cell.isRevealed ? (cell.isGhost ? 'defaultCell revealedCellGhost' : 'defaultCell revealedCellSafe') : 'defaultCell';
 
     return (
         <div 

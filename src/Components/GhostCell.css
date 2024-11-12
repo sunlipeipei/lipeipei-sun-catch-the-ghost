@@ -9,6 +9,14 @@
     color: black;
 }
 
-.revealedCell {
+.revealedCellSafe {
     background-color: rgb(255, 232, 215);
+}
+.revealedCellGhost {
+    background-color: rgb(75, 75, 75);
+}
+
+.defaultCell:hover {
+    background-color:rgb(255, 89, 0); 
+    cursor: pointer;
 }
