@@ -52,7 +52,7 @@ const initializeGameBoard = (difficulty) => {
 };
 
 // Update the adjacent ghost counts when a new ghost was added
-const updateGhostCounts = (board, row, col) => {
+const updateGhostCounts = (board, row, col, amount=1) => {
     const directions = [
         [-1, 0], [-1, -1], [-1, 1],
         [0, -1], [0, 1],
@@ -69,7 +69,7 @@ const updateGhostCounts = (board, row, col) => {
         // Validation
         if(newRow>=0 && newRow<boardRow && newCol>=0 && newCol<boardCol){
             if (!board[newRow][newCol].isGhost) {
-                board[newRow][newCol].ghostCount += 1
+                board[newRow][newCol].ghostCount += amount
             }
         }
     })
@@ -78,26 +78,40 @@ const updateGhostCounts = (board, row, col) => {
 export default function CatchTheGhostProvider({children, difficulty}){
 
     const {board: initialBoard, numGhost} = initializeGameBoard(difficulty);
-    // console.log("Initial Board:", initialBoard);
-    // console.log("Number of Ghosts:", numGhost);
+    console.log("Initial Board:", initialBoard);
+    console.log("Number of Ghosts:", numGhost);
     const [boardState, setBoardState] = useState(initialBoard);
     const [gameOverState, setGameOverState] = useState(false);
     const [messageState, setMessageState] = useState("👻 Catch the Ghosts!!! 👻");
     const [flaggedGhostCountState, setFlaggedGhostCountState] = useState(numGhost);
+    const [firstClickState, setFirstClickState] = useState(true)
 
     const revealCell = (row, col) => {
         if(!gameOverState && !boardState[row][col].isRevealed){
-            setBoardState((prevBoard)=>{
-                const newBoard = prevBoard.map((r, rowIndex)=>
-                r.map((cell, colIndex) => {
-                    if(rowIndex===row && colIndex===col){
-                        return {...cell, isRevealed: true, isFlagged: false};
+            setBoardState((prev) => {
+
+                const newBoard = prev.map((r)=> r.slice()); // use shallow copy
+                // deal with if first click is a ghost
+                if(firstClickState){
+                    setFirstClickState(false)
+                    if(newBoard[row][col].isGhost){
+                        newBoard[row][col].isGhost = false;
+                        updateGhostCounts(newBoard, row, col, -1);
+
+                        let newRow, newCol;
+                        do {
+                            newRow = Math.floor(Math.random()*newBoard.length);
+                            newCol = Math.floor(Math.random()*newBoard[0].length);
+                        } while (newBoard[newRow][newCol].isGhost || (newRow === row && newCol === col));
+                        
+                        newBoard[newRow][newCol].isGhost = true;
+                        updateGhostCounts(newBoard, newRow, newCol);
                     }
-                    return cell;
-                    })
-                );
+                }
+                newBoard[row][col].isRevealed = true;
                 const flaggedCells = newBoard.flat().filter(cell => cell.isFlagged).length; // calculate how many cells have been flagged
                 setFlaggedGhostCountState(numGhost-flaggedCells);
+
                 if(newBoard[row][col].isGhost) {
                     setMessageState("😱 Game Over! You Lost! 😱");
                     setGameOverState(true);
@@ -114,8 +128,7 @@ export default function CatchTheGhostProvider({children, difficulty}){
                     }
                 }
                 return newBoard;
-            }
-            )
+            })
         }
     }
 
