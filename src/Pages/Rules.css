@@ -1,0 +1,24 @@
+.rules-container {
+    padding: 40px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: auto;
+    color: #d6d6d6;
+
+}
+
+.rules-container h1 {
+    text-align: center;
+    color: #eeeeee;
+}
+
+.rules-container h2 {
+    margin-top: 20px;
+    color: #eeeeee;
+}
+
+.rules-container p,
+.rules-container ul,
+.rules-container ol {
+    margin: 10px 0;
+}

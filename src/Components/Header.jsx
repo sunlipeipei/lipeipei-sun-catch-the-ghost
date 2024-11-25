@@ -8,6 +8,7 @@ export default function Header(){
             <Link className='text' to="/game/easy">EASY</Link>
             <Link className='text' to="/game/medium">MEDIUM</Link>
             <Link className='text' to="/game/hard">HARD</Link>
+            <Link className='text' to="/rules">RULES</Link>
         </div>
     )
 }

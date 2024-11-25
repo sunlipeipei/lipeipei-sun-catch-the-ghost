@@ -7,6 +7,7 @@ import GameEasy from './Pages/GameEasy.jsx'
 import GameMedium from './Pages/GameMedium.jsx'
 import GameHard from './Pages/GameHard.jsx'
 import CatchTheGhostProvider from './Components/CatchTheGhostProvider.jsx'
+import Rules from './Pages/Rules.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     <CatchTheGhostProvider key='hard' difficulty='hard'>
       <GameHard/>
     </CatchTheGhostProvider>
+  },
+  {
+    path: '/rules',
+    element: <Rules />
   },
 ])
 
