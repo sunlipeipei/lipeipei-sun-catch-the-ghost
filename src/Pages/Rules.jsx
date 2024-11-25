@@ -57,20 +57,6 @@ export default function Rules(){
                 </li>
             </ol>
             
-            <h2>Game Features</h2>
-            <ul>
-                <li><strong>Safe First Click:</strong> The first square you click will always be safe, no matter where you click.</li>
-                <li><strong>Ghost Proximity Numbers:</strong> Revealed squares with numbers indicate how many ghosts are in the surrounding 8 squares.</li>
-                <li><strong>Reset Button:</strong> Start a new game with a randomized board at any time by clicking the "Reset" button.</li>
-            </ul>
-            
-            <h2>Tips for Success</h2>
-            <ul>
-                <li>Use logic to deduce where the ghosts might be based on the numbers shown in revealed squares.</li>
-                <li>Carefully place flags to keep track of potential ghost locations.</li>
-                <li>Take your time! There's no timer, so think through your moves!</li>
-            </ul>
-
             <p><strong>Good luck, and have fun catching the ghosts! 👻</strong></p>
                 </div>
     )
