@@ -3,18 +3,11 @@
     line-height: 1.6;
     max-width: 600px;
     margin: auto;
-    color: #d6d6d6;
-
-}
-
-.rules-container h1 {
-    text-align: center;
-    color: #eeeeee;
 }
 
 .rules-container h2 {
+    text-align: center;
     margin-top: 20px;
-    color: #eeeeee;
 }
 
 .rules-container p,
